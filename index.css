@@ -1,0 +1,143 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+a{
+    text-decoration: none;
+
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body{
+    /* background-color: #3D8361; */
+    background-color: #000000;
+    /* background-color: #D6CDA4; */
+    font-family: 'Roboto', sans-serif;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    /* background-color: #EEF2E6; */
+    background-color: rgba(34, 32, 32, 0.473);
+    height: 5rem;
+    
+}
+
+.navbar-toggler{
+    background-color: rgb(51, 50, 50);
+}
+
+.navbar-brand{
+    background-color: yellow;
+    /* border: 3px solid #D6CDA4; */
+    line-height: 2rem;
+    margin: 0px 10px;
+    padding: 5px 20px;
+    border-radius: 35px;
+    color: black;
+    font-weight: 570;
+    font-size: 20px;
+}
+
+.navbar-nav a{
+    line-height: 2rem;
+    margin: 0px 10px;
+    padding: 5px 20px;
+    border-radius: 35px;
+    color: white;
+    font-weight: 570;
+    font-size: large;
+}
+
+
+
+/*#page-header{
+    /* background-color: #D6CDA4; */
+    /* background-color: #1C6758; */
+    /* background-color: #B7C4CF; */
+    /* border-radius: 0px 0px 0px 300px;
+    width: 30%;
+    margin-left: 53%; */
+
+
+section div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 150px;
+    
+}
+
+.title{
+    font-size:xxx-large;
+    color: #F5C518;
+}
+
+section nav img{  
+    border-radius: 10px;
+    /* border: 5px solid #EEF2E6; */
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section nav a{
+    color: #EEF2E6;
+    font-size: 2em;
+}
+
+
+footer{
+    background-color: rgb(15, 15, 15);
+    
+}
