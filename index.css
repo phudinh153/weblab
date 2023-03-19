@@ -61,8 +61,8 @@ body{
 }
 
 header{
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
     /* background-color: #EEF2E6; */
     background-color: rgba(34, 32, 32, 0.473);
     height: 5rem;
@@ -97,14 +97,6 @@ header{
 
 
 
-/*#page-header{
-    /* background-color: #D6CDA4; */
-    /* background-color: #1C6758; */
-    /* background-color: #B7C4CF; */
-    /* border-radius: 0px 0px 0px 300px;
-    width: 30%;
-    margin-left: 53%; */
-
 
 section div{
     display: flex;
@@ -135,6 +127,8 @@ section nav a{
     color: #EEF2E6;
     font-size: 2em;
 }
+
+  
 
 
 footer{
