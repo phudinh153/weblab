@@ -25,6 +25,13 @@
     
 
     <?php
+      if(isset($_SESSION['error'])){
+        echo '<div class = "alert alert-danger">' . $_SESSION['error'] . '</div>';
+        unset($_SESSION['error']);
+      } else if(isset($_SESSION['success'])){
+        echo '<div class = "alert alert-success">' . $_SESSION['success'] . '</div>';
+        unset($_SESSION['success']);
+      }
       $page = isset($_GET['page']) ? $_GET['page'] : 'home';
       $page_path = __DIR__ . '/' . $page . '.php';
       if (file_exists($page_path)) {

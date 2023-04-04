@@ -95,7 +95,10 @@ header{
     font-size: large;
 }
 
-
+.flash{
+    color: rgb(228, 102, 102);
+    color: rgb(28, 25, 25);
+}
 
 
 section div{

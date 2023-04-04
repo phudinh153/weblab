@@ -6,7 +6,7 @@
         <form action="login_processing.php" method="post" >
             <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control" name="email" id="email"  required>
+            <input type="text" class="form-control" name="email" id="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
             </div>
             
             <div class="mb-3">

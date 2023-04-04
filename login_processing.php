@@ -5,7 +5,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
     // Retrieve email and password from the form
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
+    $_SESSION['email'] = $email;
     // Connect to the database
     $servername = "localhost";
     $username = "root";
@@ -33,23 +33,26 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         // Verify the password
         if (password_verify($password, $hashed_password)) {
             // Password is correct, set session variables and redirect to dashboard
-            $_SESSION['email'] = $email;
+            
+            $_SESSION['loggedin'] = 1;
+            $_SESSION['success'] = 'Login successfully!';
+            setcookie('user', $email, time() + 3600, '/');
             // Retrieve user level from the database and set it in session variable if necessary
             header("Location: index.php");
             exit();
         } else {
             // Password is incorrect, show error message
             $_SESSION['error'] = "Incorrect password";
-            header("Location: login.php");
+            header("Location: http://localhost/web/index.php?page=login");
             exit();
         }
     } else {
         // User does not exist in the database, show error message
         $_SESSION['error'] = "Incorrect email";
-        header("Location: login.php");
+        header("Location: http://localhost/web/index.php?page=login");
         exit();
     }
-    setcookie('user', $email, time() + 3600, '/');
+    
 
 }
 ?>

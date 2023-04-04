@@ -10,10 +10,12 @@
                 <div class="navbar-nav">
                   <a class="nav-link" href="index.php?page=home">Home</a>
                   <a class="nav-link" href="index.php?page=movies">Movies</a>
+                </div>
+                <div class="navbar-nav ms-auto">
                   <?php
                   session_start();
 
-                  if(isset($_SESSION['email'])){
+                  if(isset($_SESSION['loggedin'])){
                     echo '<a class="nav-link logout-link" href="logout.php">Logout</a>';
                     
                   }
@@ -24,6 +26,7 @@
                   }
                   ?> 
                 </div>
+                
               </div>
             </div>
           </header>
