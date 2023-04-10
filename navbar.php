@@ -1,4 +1,8 @@
-      
+      <style>
+        a.nav-link:hover{
+          background-color: white;
+        }
+      </style>
         <header class="navbar navbar-expand-lg" >
             <div class="container-fluid">
               <a class="navbar-brand" href="index.php">Rotten Egg
@@ -30,7 +34,23 @@
               </div>
             </div>
           </header>
-        
+<script>
+  $(document).ready(function(){
+    //Get the search input element
+    var $searchInput = $('#navbar-search-input');
+
+    //Add an event listener to the input element
+    $searchInput.on('input', function(){
+      //Get the search query
+      var query = $(this).val().toLowerCase();
+
+      //Perform the search and update the results
+    
+    });
+  });
+
+
+</script>        
 
 
 
