@@ -48,7 +48,7 @@
     passwordMessage.style.display = "block";
   }
   passw.addEventListener('input',(e)=>{
-    if (!validateUsername(e.target.value)) {
+    if (!validatePassword(e.target.value)) {
       passw.classList.add("border-danger");
       passw.classList.add("border-3");
       conf_passw.disabled = true;
@@ -88,7 +88,7 @@
   
 
   
-  function validateUsername(password) {
+  function validatePassword(password) {
   const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[.@$!%*?&])[A-Za-z\d.@$!%*?&]{8,}$/;
   return regex.test(password);
   }
