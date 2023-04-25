@@ -18,10 +18,14 @@
         margin-top: 50px;
       }
 
+      .movies-list div{
+        margin: 5%;
+      }
+
       .movies-list img{
         margin: 15px;
-        width: 12em;
-        height: 12em;
+        width: 15em;
+        height: 15em;
       }
 
       .searchBox{
@@ -73,6 +77,11 @@
       #searchResults div:hover{
         background-color: #555555;
       }
+
+      p{
+        padding: 15px;
+        color:aliceblue;
+      }
     </style>
     
     <section class="movies">
@@ -105,17 +114,34 @@
                 if (mysqli_select_db($conn, "movies")) {
       
                   // Retrieve movies from database
-                  $sql = "SELECT title, release_year, poster FROM films";
+                  $sql = "SELECT COUNT(*) FROM films";
                   $result = mysqli_query($conn, $sql);
 
                   
                     // Loop through results and display movies
                     if (mysqli_num_rows($result) > 0 && !isset($_GET['id'])) {
-                        while($row = mysqli_fetch_assoc($result)) {
+
+                        if(isset($_GET['pagenum'])){
+                          $nopage = $_GET['pagenum']; 
+                        }
+                        else {
+                          $nopage = 1;
+                        }
+                        $filmsPerPage = 2; //4 films per page
+                        $offset = ($nopage - 1) * $filmsPerPage;
+                        $totalFilms = mysqli_fetch_array($result)[0];
+                        $totalPages = ceil($totalFilms / $filmsPerPage);
+                        
+                        $sql = "SELECT * FROM films LIMIT $offset, $filmsPerPage";
+                        $res_data = mysqli_query($conn, $sql);
+
+                        while($row = mysqli_fetch_assoc($res_data)) {
                         echo '<div>';
                         echo '<img src="' . $row["poster"] . '" >';
+                        echo '<p>' . $row["title"] .'</p>';
                         echo '</div>';
                         }
+
                     } else if(isset($_GET['id'])){
                       $id = $_GET['id'];
                       // Query the database to get the movie with the specified id
@@ -151,6 +177,38 @@
             ?>
         
 
+    </div>
+    <div>
+      <?php
+          $nopage = $_GET['pagenum'];                     
+          $count = 1;
+          echo '<nav aria-label="Page navigation example">';
+          echo '<ul class="pagination">';
+          echo '<li class="page-item"><a class="page-link" href="http://localhost/web/index.php?page=movies&pagenum=1">1</a></li>';
+          if($nopage > 3){
+            echo '<li class="page-item"><a class="page-link" href="">...</a></li>';
+            $count-= 1;
+          }
+          $displayPages = $count + 1;
+          $i = 1;
+          while($i < 4){
+            if($nopage < 3){
+            $displayPages = $count + 1;}
+            else {
+              $displayPages = $count + $nopage - 2;
+            }
+            echo '<li class="page-item"><a class="page-link" href="http://localhost/web/index.php?page=movies&pagenum='.$displayPages.'">' . $displayPages .'</a></li>';
+            $count++;
+            
+            $i++;
+          }
+          if($nopage + $count < $totalPages + 2){
+            echo '<li class="page-item"><a class="page-link" href="#">...</a></li>';  
+            echo '<li class="page-item"><a class="page-link" href="http://localhost/web/index.php?page=movies&pagenum='.$totalPages.'">'.$totalPages.'</a></li>';
+          }
+            echo '</ul>';
+            echo '</nav>';
+      ?>
     </div>
     </section>
 
