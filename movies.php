@@ -1,5 +1,20 @@
     <style>
-      
+      @media only screen and (max-width: 600px) {
+        #formSearch{
+          width: 300px;
+        }
+        #searchResults{
+          width: 300px;
+        }
+      }
+      @media only screen and (min-width: 600px) {
+        #formSearch{
+          width: 35em;
+        }
+        #searchResults{
+          width: 35em;
+        }
+      }
       .movies-list {
         display:flex;
         flex-direction: row;
@@ -25,7 +40,8 @@
       .movies-list img{
         margin: 15px;
         width: 15em;
-        height: 15em;
+        height: 22em;
+        object-fit: cover;
       }
 
       .searchBox{
@@ -35,7 +51,7 @@
         align-items: center;
         flex-wrap: wrap;
         margin-top: 50px;
-        border-color: #FFFF00;
+        /* border-color: #FFFF00; */
       }
 
       #formSearch{
@@ -44,12 +60,13 @@
         outline: none;
         padding: 5px;
         margin: 0;
-        width: 30em;
+        /* width: 25rem; */
         height: 30px;
         border-radius: 2em;
-        border-color: #FFFF00;
+        /* border-color: #FFFF00; */
         color: white;
-        border-width: 3px;
+        /* border-width: 3px; */
+        border: solid 3px #FFFF00;
       }
 
       #searchResults{
@@ -63,7 +80,7 @@
         border-radius: 5px 5px 25px 25px;
         max-height: 250px;
         overflow-y: auto;
-        width: 30em;
+        /* width: 25rem; */
       }
 
       #searchResults div{
