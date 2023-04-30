@@ -21,7 +21,7 @@
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        margin-top: 100px;
+        margin-top: 10px;
       }
 
       .title{
@@ -99,6 +99,16 @@
         padding: 15px;
         color:aliceblue;
       }
+      .page-link{
+        color:#FFFF00;
+        background-color: #10100e;
+        border-color: #FFFF00;
+      }
+      .page-link:hover{
+        color:#10100e;
+        background-color: #FFFF00;
+        border-color: #10100e;
+      }
     </style>
     
     <section class="movies">
@@ -144,7 +154,7 @@
                         else {
                           $nopage = 1;
                         }
-                        $filmsPerPage = 2; //4 films per page
+                        $filmsPerPage = 1; //4 films per page
                         $offset = ($nopage - 1) * $filmsPerPage;
                         $totalFilms = mysqli_fetch_array($result)[0];
                         $totalPages = ceil($totalFilms / $filmsPerPage);
@@ -195,33 +205,43 @@
         
 
     </div>
-    <div>
-      <?php
-          $nopage = $_GET['pagenum'];                     
-          $count = 1;
+    <div class="movies-list">
+      <?php    
+            $nopage = isset($_GET['pagenum']) ? $_GET['pagenum'] : 1;
+               
           echo '<nav aria-label="Page navigation example">';
           echo '<ul class="pagination">';
-          echo '<li class="page-item"><a class="page-link" href="http://localhost/web/index.php?page=movies&pagenum=1">1</a></li>';
-          if($nopage > 3){
-            echo '<li class="page-item"><a class="page-link" href="">...</a></li>';
-            $count-= 1;
-          }
-          $displayPages = $count + 1;
-          $i = 1;
-          while($i < 4){
-            if($nopage < 3){
-            $displayPages = $count + 1;}
-            else {
-              $displayPages = $count + $nopage - 2;
+          // echo '<li class="page-item"><a class="page-link" href="http://localhost/web/index.php?page=movies&pagenum=1">1</a></li>';
+          $flag = 0;
+          $print = 0;
+          for($i = 1; $i < $totalPages + 1 ; $i++){
+            if($i == 2 && $nopage > 5 && $flag == 0 && $totalPages > 9){
+              echo '<li class="page-item"><a class="page-link" href="">...</a></li>';
+              $print++;
+              $i = $nopage - 2;
+              $flag = 1;
             }
-            echo '<li class="page-item"><a class="page-link" href="http://localhost/web/index.php?page=movies&pagenum='.$displayPages.'">' . $displayPages .'</a></li>';
-            $count++;
-            
-            $i++;
-          }
-          if($nopage + $count < $totalPages + 2){
-            echo '<li class="page-item"><a class="page-link" href="#">...</a></li>';  
-            echo '<li class="page-item"><a class="page-link" href="http://localhost/web/index.php?page=movies&pagenum='.$totalPages.'">'.$totalPages.'</a></li>';
+            $link = "http://localhost/web/index.php?page=movies&pagenum=" .$i;
+            if($i == $nopage){
+              $style = 'style="color:#10100e; background-color: #FFFF00; border-color: #10100e;"';
+            }
+            else{
+              $style='';
+            }
+            echo '<li class="page-item"><a class="page-link"'. $style.' href="'.$link.'">'.$i.'</a></li>';
+            $print++;
+            if(($i - 2 == $nopage && $totalPages - $nopage >= 4 && $print == 7 && $nopage >= 5 ) || ($nopage < 5 && $print == 7)){
+              echo '<li class="page-item"><a class="page-link" href="">...</a></li>';
+              $print++;
+              $i = $totalPages;
+              $link = "http://localhost/web/index.php?page=movies&pagenum=" .$i;
+              echo '<li class="page-item"><a class="page-link" href="'.$link.'">'.$i.'</a></li>';
+              $print++;
+            }
+            if($print > 8){
+              break;
+            }
+
           }
             echo '</ul>';
             echo '</nav>';
