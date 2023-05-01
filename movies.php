@@ -164,7 +164,7 @@
 
                         while($row = mysqli_fetch_assoc($res_data)) {
                         echo '<div>';
-                        echo '<img src="' . $row["poster"] . '" >';
+                        echo '<img class="lazy" loading="lazy" src="' . $row["poster"] . '" >';
                         echo '<p>' . $row["title"] .'</p>';
                         echo '</div>';
                         }
@@ -249,6 +249,7 @@
     </div>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/intersection-observer@2.0.4/dist/intersection-observer.min.js"></script>
 
 <script>
   // Select the search box and search results div
@@ -309,6 +310,38 @@ formSearch.addEventListener('input', () => {
 
 
 });
+
+function lazyLoad() {
+  const images = document.querySelectorAll('.lazy');
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  function handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.intersectionRatio > 0) {
+        const img = entry.target;
+        const src = img.getAttribute('src');
+
+        img.setAttribute('src', src);
+        img.classList.remove('lazy');
+
+        observer.unobserve(img);
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver(handleIntersection, options);
+
+  images.forEach(img => {
+    observer.observe(img);
+  });
+}
+
+//lazyLoad();
+
 
 
 </script>
