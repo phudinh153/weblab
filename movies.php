@@ -154,7 +154,7 @@
                         else {
                           $nopage = 1;
                         }
-                        $filmsPerPage = 1; //4 films per page
+                        $filmsPerPage = 2; //4 films per page
                         $offset = ($nopage - 1) * $filmsPerPage;
                         $totalFilms = mysqli_fetch_array($result)[0];
                         $totalPages = ceil($totalFilms / $filmsPerPage);
@@ -211,7 +211,7 @@
                
           echo '<nav aria-label="Page navigation example">';
           echo '<ul class="pagination">';
-          // echo '<li class="page-item"><a class="page-link" href="http://localhost/web/index.php?page=movies&pagenum=1">1</a></li>';
+          // echo '<li class="page-item"><a class="page-link" href="http://localhost/weblab/index.php?page=movies&pagenum=1">1</a></li>';
           $flag = 0;
           $print = 0;
           for($i = 1; $i < $totalPages + 1 ; $i++){
@@ -221,7 +221,7 @@
               $i = $nopage - 2;
               $flag = 1;
             }
-            $link = "http://localhost/web/index.php?page=movies&pagenum=" .$i;
+            $link = "http://localhost/weblab/index.php?page=movies&pagenum=" .$i;
             if($i == $nopage){
               $style = 'style="color:#10100e; background-color: #FFFF00; border-color: #10100e;"';
             }
@@ -234,7 +234,7 @@
               echo '<li class="page-item"><a class="page-link" href="">...</a></li>';
               $print++;
               $i = $totalPages;
-              $link = "http://localhost/web/index.php?page=movies&pagenum=" .$i;
+              $link = "http://localhost/weblab/index.php?page=movies&pagenum=" .$i;
               echo '<li class="page-item"><a class="page-link" href="'.$link.'">'.$i.'</a></li>';
               $print++;
             }
@@ -297,7 +297,7 @@ formSearch.addEventListener('input', () => {
       // Add click event listener to movie div to show movie details
       movieDiv.addEventListener('click', () => {
         const id = movie.getElementsByTagName('id')[0].textContent;;
-        window.location.href = `/web/index.php?page=movies&id=${id}`;
+        window.location.href = `/weblab/index.php?page=movies&id=${id}`;
       });
 
       // Add movie div to search results div
@@ -340,7 +340,7 @@ function lazyLoad() {
   });
 }
 
-//lazyLoad();
+lazyLoad();
 
 
 
