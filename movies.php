@@ -154,7 +154,7 @@
                         else {
                           $nopage = 1;
                         }
-                        $filmsPerPage = 2; //4 films per page
+                        $filmsPerPage = 12; //4 films per page
                         $offset = ($nopage - 1) * $filmsPerPage;
                         $totalFilms = mysqli_fetch_array($result)[0];
                         $totalPages = ceil($totalFilms / $filmsPerPage);
@@ -164,7 +164,7 @@
 
                         while($row = mysqli_fetch_assoc($res_data)) {
                         echo '<div>';
-                        echo '<img class="lazy" loading="lazy" src="' . $row["poster"] . '" >';
+                        echo '<img class="lazy" loading="lazy" data-src="' . $row["poster"] . '" >';
                         echo '<p>' . $row["title"] .'</p>';
                         echo '</div>';
                         }
@@ -316,22 +316,23 @@ function lazyLoad() {
   const options = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.1
+    threshold: 0.2
   };
 
   function handleIntersection(entries, observer) {
     entries.forEach(entry => {
       if (entry.intersectionRatio > 0) {
         const img = entry.target;
-        const src = img.getAttribute('src');
+        const src = img.getAttribute('data-src');
 
-        img.setAttribute('src', src);
-        img.classList.remove('lazy');
-
-        observer.unobserve(img);
+        setTimeout(() => {
+          img.setAttribute('src', src);
+          img.classList.remove('lazy');
+          observer.unobserve(img);
+        }, 500); // Add a 500ms delay before loading the image
       }
     });
-  }
+}
 
   const observer = new IntersectionObserver(handleIntersection, options);
 

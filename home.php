@@ -1,5 +1,9 @@
-
-    <section>
+<style>
+    .home{
+        margin-bottom: 300px;
+    }
+</style>
+    <section class="home">
       <div class="title">Top rated movies 2022</div>
 
       <div> 
@@ -12,11 +16,11 @@
     </div>
     </section>
 
-    <footer class="py-3 mt-auto fixed-bottom">
+    <!-- <footer class="py-3 mt-auto fixed-bottom">
         <div class="container">
             <span class="text-light">&copy; Rotten Egg</span>
         </div>
-    </footer>
+    </footer> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
