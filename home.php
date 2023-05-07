@@ -1,16 +1,30 @@
 <style>
     .home{
         margin-bottom: 300px;
+        display: flex;
+        flex-flow: row wrap;
+        /* justify-content: space-between; */
+        /* align-content: center;  */
+    }
+    .title{
+        margin-left: 35%;
+        margin-top: 100px
+    }
+    .movie{
+        margin-left: 45%;
+        margin-top: 50px
     }
 </style>
     <section class="home">
-      <div class="title">Top rated movies 2022</div>
-
-      <div> 
+      <div class="title">Highest rated movie in 2022</div>
+      
+              </a>
+      <div class="movie"> 
         <nav>
             <a> 
-              <img src="https://img.cdn.vncdn.io/cinema/img/80187507856383526-co-gi-moi-o-phim-zombie-dau-tien-tai-viet-nam-lost-in-mekong-delta-9dd-6275603.png" width="50%" height="50%">
+              <img src="https://m.media-amazon.com/images/M/MV5BMzQ1NTA4MmMtMmU0Mi00MTQ3LTkxMDktMDc3MDdkOTIwNTlhXkEyXkFqcGdeQXVyMTE2NTUzNzc5._V1_.jpg" width="300px" height="400px">
             </a>
+            <p style="color: white;">Lost in Mekong Delta</p>
         </nav>
 
     </div>
