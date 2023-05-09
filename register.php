@@ -1,40 +1,50 @@
+<style>
+  form{
+    /* width: 100px; */
+    color:  white;
+    border-color: rgba(255, 255, 255, 0.5);
+    border: 2px;
+    width: 400px;
+  }
+  .reg{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10%;
+  }
+</style>    
+  <div class="reg mt-5">
     
-  <div class="row mt-5">
-    
-    <div class="col-6 offset-3" style="border-radius: 10px; background-color: yellow; font-weight: 570; font-size: 20px">
-    <h1 class="text-center">Signup</h1>
-        <form action="signup_processing.php" method="post" >
+    <form action="signup_processing.php" method="post"
+    style="border-radius: 10px; background-color: transparent; font-weight: 570; font-size: 20px">
+      <h1 class="text-center">Signup</h1>
+        
             <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control" name="email" id="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
+            <input type="text" class="form-control bg-dark text-light" name="email" id="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
             </div>
 
             <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" name="username" id="username" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>"  required>
+            <input type="text" class="form-control bg-dark text-light" name="username" id="username" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>"  required>
             </div>
             
             <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" name="password" id="password" oninput="checkPass()" required>
+            <input type="password" class="form-control bg-dark text-light" name="password" id="password" oninput="checkPass()" required>
             </div>
             <div class="alert alert-danger" id="password-message" style="display: none;">Password must have 8 letters and contain at least one lowercase letter, one uppercase letter, one number, and one special character.</div>
            
             <div class="mb-3">
             <label for="confirm_password" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" name="confirm_password" id="confirm_password" oninput="conPass()" required>
+            <input type="password" class="form-control bg-dark text-light" name="confirm_password" id="confirm_password" oninput="conPass()" required>
             </div>
             <div class="alert alert-danger" id="conf_password-message" style="display: none;">Confirm Password is not the same as Password</div>
             
             
             <div class="mb-3">
-                <button class="btn btn-success">Signup</button>
+                <button class="btn bg-dark text-light">Signup</button>
             </div>
-            
-        
-            </form>
-           
-    </div>
+      </form>
   </div>
 <script>
   function checkPass(){

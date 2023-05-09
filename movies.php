@@ -177,8 +177,8 @@
                               // Display the movie details
                               echo '<div style="color: white;">';
                               echo '<img src="' . $row["poster"] . '" >';
-                              echo '<div>' . $row["title"]. '<div>';
-                              echo '<div>' . $row["release_year"]. '<div>';
+                              echo '<div>' . $row["title"]. '</div>';
+                              echo '<div>' . $row["release_year"]. '</div>';
                               echo '</div>';
                           }
                         }
@@ -215,6 +215,9 @@
     </div>
     <div class="movies-list">
       <?php    
+          if(!isset($_GET['id'])){
+            
+          
             $nopage = isset($_GET['pagenum']) ? $_GET['pagenum'] : 1;
                
           echo '<nav aria-label="Page navigation example">';
@@ -253,6 +256,7 @@
           }
             echo '</ul>';
             echo '</nav>';
+        }
       ?>
     </div>
     </section>
