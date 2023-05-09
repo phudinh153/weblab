@@ -11,7 +11,7 @@
         margin-top: 100px
     }
     .movie{
-        margin-left: 45%;
+        margin-left: 40%;
         margin-top: 50px
     }
 </style>
