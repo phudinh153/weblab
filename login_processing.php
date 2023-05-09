@@ -43,13 +43,13 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         } else {
             // Password is incorrect, show error message
             $_SESSION['error'] = "Incorrect password";
-            header("Location: http://localhost/web/index.php?page=login");
+            header("Location: ./index.php?page=login");
             exit();
         }
     } else {
         // User does not exist in the database, show error message
         $_SESSION['error'] = "Incorrect email";
-        header("Location: http://localhost/web/index.php?page=login");
+        header("Location: ./index.php?page=login");
         exit();
     }
     

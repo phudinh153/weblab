@@ -13,21 +13,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_password']) &&
     // Validate password
   if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.$@$!%*?&])[A-Za-z\d.$@$!%*?&]{8,}$/', $password)) {
     $_SESSION['error'] = 'Password must have 8 letters and contain at least one lowercase letter, one uppercase letter, one number, and one special character.';
-    header('Location: http://localhost/web/index.php?page=register');
+    header('Location: ./index.php?page=register');
     exit();
   }
   
   // Validate username
   if (preg_match('/[^a-zA-Z0-9]/', $username)) {
     $_SESSION['error'] = 'Username cannot contain special characters.';
-    header('Location: http://localhost/web/index.php?page=register');
+    header('Location: ./index.php?page=register');
     exit();
   }
   
   // Check if passwords match
   if ($password !== $confirm_password) {
     $_SESSION['error'] = 'Passwords do not match.';
-    header('Location: http://localhost/web/index.php?page=register');
+    header('Location: ./index.php?page=register');
     exit();
   }
 
@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_password']) &&
   // Check if count is 0 (i.e. username and email are unique) and return boolean value
   if ($row['count'] != 0){
     $_SESSION['error'] = 'Username or email is not unique!';
-    header('Location: http://localhost/web/index.php?page=register');
+    header('Location: ./index.php?page=register');
     exit();
   }
   else{

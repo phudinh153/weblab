@@ -146,7 +146,7 @@
 
                   
                     // Loop through results and display movies
-                    if (mysqli_num_rows($result) > 0 && !isset($_GET['id'])) {
+                    if (mysqli_num_rows($result) > 0) {
 
                         if(isset($_GET['pagenum'])){
                           $nopage = $_GET['pagenum']; 
@@ -154,40 +154,48 @@
                         else {
                           $nopage = 1;
                         }
-                        $filmsPerPage = 12; //4 films per page
+                        $filmsPerPage = 1; //4 films per page
                         $offset = ($nopage - 1) * $filmsPerPage;
                         $totalFilms = mysqli_fetch_array($result)[0];
                         $totalPages = ceil($totalFilms / $filmsPerPage);
                         
-                        $sql = "SELECT * FROM films LIMIT $offset, $filmsPerPage";
-                        $res_data = mysqli_query($conn, $sql);
+                        if(isset($_GET['id'])){
+                          $filmsPerPage = 1; //4 films per page
+                          $offset = ($nopage - 1) * $filmsPerPage;
+                          $totalFilms = 1;
+                          $totalPages = ceil($totalFilms / $filmsPerPage);
+                          $id = $_GET['id'];
+                          // Query the database to get the movie with the specified id
+                          $query = "SELECT * FROM films WHERE id = '$id'";
+                          $result = mysqli_query($conn, $query);
+    
+                          // Check if there is a result
+                          if (mysqli_num_rows($result) > 0) {
+                              // Fetch the movie details
+                              $row = mysqli_fetch_assoc($result);
+    
+                              // Display the movie details
+                              echo '<div style="color: white;">';
+                              echo '<img src="' . $row["poster"] . '" >';
+                              echo '<div>' . $row["title"]. '<div>';
+                              echo '<div>' . $row["release_year"]. '<div>';
+                              echo '</div>';
+                          }
+                        }
+                        else{
 
-                        while($row = mysqli_fetch_assoc($res_data)) {
-                        echo '<div>';
-                        echo '<img class="lazy" loading="lazy" data-src="' . $row["poster"] . '" >';
-                        echo '<p>' . $row["title"] .'</p>';
-                        echo '</div>';
+                          $sql = "SELECT * FROM films LIMIT $offset, $filmsPerPage";
+                          $res_data = mysqli_query($conn, $sql);
+
+                          while($row = mysqli_fetch_assoc($res_data)) {
+                          echo '<div>';
+                          echo '<img class="lazy" loading="lazy" data-src="' . $row["poster"] . '" >';
+                          echo '<p>' . $row["title"] .'</p>';
+                          echo '</div>';
+                            }
                         }
 
-                    } else if(isset($_GET['id'])){
-                      $id = $_GET['id'];
-                      // Query the database to get the movie with the specified id
-                      $query = "SELECT * FROM films WHERE id = '$id'";
-                      $result = mysqli_query($conn, $query);
-
-                      // Check if there is a result
-                      if (mysqli_num_rows($result) > 0) {
-                          // Fetch the movie details
-                          $row = mysqli_fetch_assoc($result);
-
-                          // Display the movie details
-                          echo '<div style="color: white;">';
-                          echo '<img src="' . $row["poster"] . '" >';
-                          echo '<div>' . $row["title"]. '<div>';
-                          echo '<div>' . $row["release_year"]. '<div>';
-                          echo '</div>';
-                    }
-                  } else {
+                    }  else {
                     echo "Movie not found";
                   }
                   
@@ -221,7 +229,7 @@
               $i = $nopage - 2;
               $flag = 1;
             }
-            $link = "http://localhost/weblab/index.php?page=movies&pagenum=" .$i;
+            $link = "./index.php?page=movies&pagenum=" .$i;
             if($i == $nopage){
               $style = 'style="color:#10100e; background-color: #FFFF00; border-color: #10100e;"';
             }
@@ -234,7 +242,7 @@
               echo '<li class="page-item"><a class="page-link" href="">...</a></li>';
               $print++;
               $i = $totalPages;
-              $link = "http://localhost/weblab/index.php?page=movies&pagenum=" .$i;
+              $link = "./index.php?page=movies&pagenum=" .$i;
               echo '<li class="page-item"><a class="page-link" href="'.$link.'">'.$i.'</a></li>';
               $print++;
             }
@@ -275,7 +283,7 @@ formSearch.addEventListener('input', () => {
   
   // Make AJAX request to server to get list of movies
   // Make AJAX request to server to get list of movies
-  fetch(`/web/search.php?query=${searchValue}`)
+  fetch(`./search.php?query=${searchValue}`)
   .then(response => response.text())
   .then(data => {
     // Create a new DOM parser
@@ -297,7 +305,7 @@ formSearch.addEventListener('input', () => {
       // Add click event listener to movie div to show movie details
       movieDiv.addEventListener('click', () => {
         const id = movie.getElementsByTagName('id')[0].textContent;;
-        window.location.href = `/weblab/index.php?page=movies&id=${id}`;
+        window.location.href = `./index.php?page=movies&id=${id}`;
       });
 
       // Add movie div to search results div
