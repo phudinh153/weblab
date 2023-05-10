@@ -15,10 +15,18 @@
                   <a class="nav-link" href="index.php?page=home">Home</a>
                   <a class="nav-link" href="index.php?page=movies">Movies</a>
                   <a class="nav-link" href="index.php?page=about">About Us</a>
+                  <?php
+                  session_start();
+
+                  if(isset($_SESSION['loggedin'])){
+                    echo '<a class="nav-link logout-link" href="index.php?page=add_movie">Add movies</a>';
+                    
+                  }
+                  ?>
+
                 </div>
                 <div class="navbar-nav ms-auto">
                   <?php
-                  session_start();
 
                   if(isset($_SESSION['loggedin'])){
                     echo '<a class="nav-link logout-link" href="logout.php">Logout</a>';

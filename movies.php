@@ -23,6 +23,7 @@
         flex-wrap: wrap;
         margin-top: 10px;
       }
+   
 
       .title{
         display: flex;
@@ -109,9 +110,13 @@
         background-color: #FFFF00;
         border-color: #10100e;
       }
+      a{
+        text-decoration: none;
+      }
     </style>
-    
-    <section class="movies">
+    <?php
+    if(!isset($_GET['id'])){
+    echo '<section class="movies">
       <div class="title">
         <span>Movies</span>
       </div>
@@ -121,9 +126,11 @@
           <input type="search" id="formSearch" placeholder="Search"/>
         </div>    
         <div id="searchResults" style="display: none;"></div>
-      </div>
-
-      <div class = "movies-list"> 
+      </div>';
+      } ?>
+      <div class = "movies-list">
+    
+     
         
             <!-- <a> 
               <img src="https://img.cdn.vncdn.io/cinema/img/80187507856383526-co-gi-moi-o-phim-zombie-dau-tien-tai-viet-nam-lost-in-mekong-delta-9dd-6275603.png" width="50%" height="50%">
@@ -154,13 +161,13 @@
                         else {
                           $nopage = 1;
                         }
-                        $filmsPerPage = 1; //4 films per page
+                        $filmsPerPage = isset($_SESSION['max_pics']) ? $_SESSION['max_pics'] : 1; //4 films per page
                         $offset = ($nopage - 1) * $filmsPerPage;
                         $totalFilms = mysqli_fetch_array($result)[0];
                         $totalPages = ceil($totalFilms / $filmsPerPage);
                         
                         if(isset($_GET['id'])){
-                          $filmsPerPage = 1; //4 films per page
+                          $filmsPerPage = 1;
                           $offset = ($nopage - 1) * $filmsPerPage;
                           $totalFilms = 1;
                           $totalPages = ceil($totalFilms / $filmsPerPage);
@@ -179,6 +186,7 @@
                               echo '<img src="' . $row["poster"] . '" >';
                               echo '<div>' . $row["title"]. '</div>';
                               echo '<div>' . $row["release_year"]. '</div>';
+                              echo '<div>' . $row["description"]. '</div>';
                               echo '</div>';
                           }
                         }
@@ -189,8 +197,8 @@
 
                           while($row = mysqli_fetch_assoc($res_data)) {
                           echo '<div>';
-                          echo '<img class="lazy" loading="lazy" data-src="' . $row["poster"] . '" >';
-                          echo '<p>' . $row["title"] .'</p>';
+                          echo '<a href="http://localhost/weblab/index.php?page=movies&id=' . $row["id"] . '" ><img class="lazy" loading="lazy" data-src="' . $row["poster"] . '" >';
+                          echo '<p>' . $row["title"] .'</p></a>';
                           echo '</div>';
                             }
                         }
@@ -259,11 +267,25 @@
         }
       ?>
     </div>
+    <?php
+    if(!isset($_GET['id'])){
+      $val = isset($_SESSION['max_pics']) ? $_SESSION['max_pics'] : 1;
+      echo '<div style=" display:flex; justify-content: center">
+      <form action="filmOn.php" method="POST">
+        <label class="text-light" for="max_pics">Number of Movies to Display:</label>
+        <input style="border-radius: 5px;" class="bg-dark text-light" type="number" id="max_pics" name="max_pics" value="'. $val. '">
+        <button class="btn text-light bg-dark" type="submit">Submit</button>
+      </form>
+      </div>';}
+    ?>
+
+    
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/intersection-observer@2.0.4/dist/intersection-observer.min.js"></script>
 
 <script>
+
   // Select the search box and search results div
 const formSearch = document.querySelector('#formSearch');
 const searchResults = document.querySelector('#searchResults');
@@ -285,7 +307,6 @@ formSearch.addEventListener('input', () => {
   // Clear previous search results
   searchResults.innerHTML = '';
   
-  // Make AJAX request to server to get list of movies
   // Make AJAX request to server to get list of movies
   fetch(`./search.php?query=${searchValue}`)
   .then(response => response.text())

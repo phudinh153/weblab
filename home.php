@@ -1,6 +1,6 @@
 <style>
     .home{
-        margin-bottom: 300px;
+        margin-bottom: 100px;
         display: flex;
         flex-flow: row wrap;
         /* justify-content: space-between; */
